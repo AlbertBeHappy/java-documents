@@ -8,17 +8,19 @@ import java.awt.event.*;        //action listener is a part of this package;
  * @author (Zhiqiang Yu)
  * @version (version 1.0 -- 12/09/2021)
  */
-public class CalculatorGUI extends JFrame implements ActionListener, KeyListener
+public class CalculatorGUI extends JFrame implements ActionListener, KeyListener, MouseListener, WindowListener
 {
     JPanel redPanel;        
     JPanel greenPanel;
-    JPanel bluePanel;
+    JPanel bluePanel; 
     
     JButton btnOne;     
     JButton btnTwo;
     JButton btnThree;
     
-    JTextField textField;       
+    JTextField textField;
+    
+    String expression = "";
     /**
      * Constructor for objects of class CalculatorGUI
      */
@@ -78,32 +80,50 @@ public class CalculatorGUI extends JFrame implements ActionListener, KeyListener
         setPreferredSize(new Dimension(400, 300));      
         pack(); 
         
+        setFocusable(true);
+        //addKeyListener(this);       //registe key listener;
+        //bluePanel.setFocusable(true);
+        //bluePanel.addMouseListener(this);
         
-        addKeyListener(this);       //registe key listener;
-        
+        addWindowListener(this);
     }
-    
+    /**
+     * actionListener
+     */
     public void actionPerformed(ActionEvent e)
     {
         String cnmd = e.getActionCommand();
         if (cnmd.equals("CNMD_One"))
         {
-            System.out.println("Button one was clicked!");
+            expression = expression + "1";
+            //textField.setText("1");
         }else
         if(cnmd.equals("CNMD_Two"))
         {
-            System.out.println("Button two was clicked!");
+            expression = expression + "2";
+            //textField.setText("2");
         }else
         if(cnmd.equals("CNMD_Three"))
         {
-            System.out.println("Button three was clicked!");
+            expression = expression + "3";
+            //textField.setText("3");
         }
+        textField.setText(expression);
         //System.out.println(e.getActionCommand());
     }
-    
+    /**
+     * keyListener
+     */
     public void keyPressed(KeyEvent e)
     {
-        System.out.println("A key was pressed!");
+        System.out.println("A key was pressed!" + e.getKeyCode());
+        /*
+        int key = e.getKeyCode();
+        if (key == KeyEvent.VK_BACK_SPACE)
+        {
+            System.out.println("Backspace was pressed!" + e.getKeyCode());
+        }
+        */
     }
     
     public void keyReleased(KeyEvent e)
@@ -115,7 +135,85 @@ public class CalculatorGUI extends JFrame implements ActionListener, KeyListener
     {
         
     }
+    
+    /**
+     * mouseListener
+     */
+    public void mousePressed(MouseEvent e)
+    {
+        System.out.println("Mouse pressed; # of clicks: " + e.getClickCount());
+    }
+    public void mouseReleased(MouseEvent e)
+    {
+        System.out.println("Mouse released; # of clicks: " + e.getClickCount());
+    }
+    public void mouseEntered(MouseEvent e)
+    {
+        System.out.println("Mouse entered");
+    }
+    public void mouseExited(MouseEvent e)
+    {
+        System.out.println("Mouse exited");
+    }
+    public void mouseClicked(MouseEvent e)
+    {
+        System.out.println("Mouse clicked (# of clicks: " + e.getClickCount() + ")");
+    }
 
+    //window listener
+    public void windowActivated(WindowEvent arg0) 
+    {  
+        System.out.println("activated");  
+    }  
+    
+    public void windowClosed(WindowEvent arg0) 
+    {  
+        System.out.println("closed");  
+    }
+    
+    public void windowClosing(WindowEvent arg0) 
+    {  
+        JOptionPane.showMessageDialog(this, "Are you sure you want to cloes the window?");
+        //A pause so user can see the message before
+        //the window actually closes.
+        ActionListener task = new ActionListener() {
+            boolean alreadyDisposed = false;
+            public void actionPerformed(ActionEvent e) {
+                if (isDisplayable()) {
+                    alreadyDisposed = true;
+                    dispose();
+                }
+            }
+        };
+        Timer timer = new Timer(500, task); //fire every half second
+        timer.setInitialDelay(2000);        //first delay 2 seconds
+        timer.setRepeats(false);
+        timer.start();
+        //System.out.println("closing");  
+        //dispose();  
+    }  
+    
+    public void windowDeactivated(WindowEvent arg0)     
+    {  
+        System.out.println("deactivated");  
+    }  
+    
+    public void windowDeiconified(WindowEvent arg0) 
+    {  
+        System.out.println("deiconified");  
+    }  
+    
+    public void windowIconified(WindowEvent arg0) 
+    {  
+        System.out.println("iconified");  
+    }  
+    
+    public void windowOpened(WindowEvent arg0) 
+    {  
+        System.out.println("opened");  
+    }  
+
+    
     public static void main (String[] args)
     {
         CalculatorGUI frame = new CalculatorGUI();
