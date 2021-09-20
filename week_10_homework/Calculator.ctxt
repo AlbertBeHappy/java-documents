@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Calculator
+comment0.text=\n\ Write\ a\ description\ of\ class\ Calculator\ here.\n\ \n\ layout\ manager;\ complex\ layout;\ backspace;\ use\ array\ to\ create\ button;\n\n\ @author\ (Zhiqiang\ Yu)\n\ @version\ (version\ week\ 10)\n
+comment1.params=
+comment1.target=Calculator()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Calculator\n
+comment2.params=
+comment2.target=void\ CreateCalcGUI()
+comment2.text=\n\ a\ method\ to\ set\ up\ the\ GUI\n
+comment3.params=e
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment4.params=arg
+comment4.target=void\ main(java.lang.String[])
+numComments=5
